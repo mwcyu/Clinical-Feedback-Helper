@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import bcitLogo from "../../assets/bcit-logo.png";
-import { supabaseAccess } from "../../lib/supabaseAccessClient";
 import { Shield, Lock, GraduationCap, FileText, Users, ArrowRight } from "lucide-react";
 
 type View = "login" | "admin-login";
@@ -16,25 +15,23 @@ export default function AccessPage({ onLoginSuccess }: AccessPageProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   // -------------------------
-  // VALIDATION (Supabase)
+  // VALIDATION (Environment Variables)
   // -------------------------
   const validateCode = async (role: "user" | "admin") => {
     setIsLoading(true);
     setMessage("");
 
     try {
-      const { data, error } = await supabaseAccess
-        .from("access_codes")
-        .select("code")
-        .eq("role", role)
-        .single();
+      const expectedCode = role === "user" 
+        ? import.meta.env.VITE_USER_ACCESS_CODE 
+        : import.meta.env.VITE_ADMIN_ACCESS_CODE;
 
-      if (error || !data) {
-        setMessage("Unable to validate access code. Please try again.");
+      if (!expectedCode) {
+        setMessage("Access code configuration is missing. Please contact support.");
         return false;
       }
 
-      return data.code === code.trim();
+      return expectedCode === code.trim();
     } catch (err) {
       setMessage("An unexpected error occurred.");
       return false;

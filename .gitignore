@@ -103,9 +103,10 @@ Desktop.ini
 
 .langgraph_api/
 .github/
-ISSP/
+ISSP/*
 ENHANCEMENT_GUIDE.md
 ENHANCEMENTS_SUMMARY.md
 SIMPLIFICATION_SUMMARY.md
 agent-chat-ui/
 backend/data/*
+ISSP/

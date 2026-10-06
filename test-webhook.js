@@ -1,5 +1,10 @@
 
-const url = "https://tedok79603.app.n8n.cloud/webhook/0147a1ea-8f95-411a-bc1c-1f080fd5ffc3";
+// Run with: node --env-file=.env test-webhook.js
+const url = process.env.VITE_N8N_WEBHOOK_URL;
+if (!url) {
+  console.error("VITE_N8N_WEBHOOK_URL is not set (run with --env-file=.env)");
+  process.exit(1);
+}
 
 async function test() {
   try {

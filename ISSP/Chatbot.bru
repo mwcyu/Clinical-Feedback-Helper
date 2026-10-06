@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: https://tedok79603.app.n8n.cloud/webhook/0147a1ea-8f95-411a-bc1c-1f080fd5ffc3
+  url: {{process.env.N8N_WEBHOOK_URL}}
   body: json
   auth: inherit
 }

@@ -8,8 +8,7 @@ export async function sendMessageToAI(
   userMessage?: string,
   standardData?: Standard
 ): Promise<string> {
-  const webhookUrl =
-    "https://clinicalfeedbackhelpern8n.onrender.com/webhook/0147a1ea-8f95-411a-bc1c-1f080fd5ffc3";
+  const webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL;
   const sessionId = getSessionId();
 
   const payload: any = {
